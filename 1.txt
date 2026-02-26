@@ -1,0 +1,21 @@
+A Mosaic Fertilizantes é um expoente do agronegócio mundial. Seus fertilizantes nutrem a terra que alimenta o planeta inteiro, garantindo segurança alimentar para mais de 40 países.
+Sua unidade em Araxá é uma operação monumental de excelência técnica e de
+impacto econômico. Aqui, a Mosaic produz nutrientes fosfatados de alta performance.
+O principal minério extraído é a fluorapatita, que libera flúor na água durante o processo de refinamento.
+Como o flúor é tóxico e bioacumulativo, ele não pode ser descartado em águas superficiais. Por padrão, a Mosaic trata esse efluente adicionando cal para precipitar o flúor. O problema é que essa reação gera o lodo: um material gelatinoso, sem valor comercial e de grande volume. Esse rejeito ocupa o espaço útil das barragens, forçando a empresa a gastar milhões de reais com: dragagem, manutenção, aterros industriais e obras de ampliação dessas estruturas.
+Pensando nisso, nós, da Cristal Minas, desenvolvemos o RCLF - Reator de Cristalização de Leito Fluidizado. Ao invés de despejar o efluente na barragem de rejeitos, nós vamos redirecioná-lo para um reator a poucos metros de distância do canal de lama. Esse reator irá reagir o flúor com cloreto de cálcio, formando a fluorita, uma matéria-prima essencial em siderurgias, em metalurgias e em indústrias químicas. Atualmente, grandes empresas próximas à Mosaic precisam importar a maior parte da fluorita usada em suas operações, pois o mercado brasileiro não supre a demanda por esse produto no setor industrial.
+Dessa forma, ao invés de despediçar dinheiro com cal e lodo, a Mosaic pode aproveitar o flúor presente nos efluentes para lucrar com a produção e com a venda de fluorita. Essa forma de economia circular seria uma excelente maneira da Mosaic transformar um problema ambiental em investimento sustentável.
+O reator funciona assim: no canal de lama, um duto redireciona o efluente para o sistema de cristalização. Nele, sensores medem em milissegundos a vazão e a concentração de flúor, calculando a dose exata de cloreto de cálcio. A água entra no reator com um fluxo ascendente que mantém as sementes, isto é, grãos de fluorita em suspensão. Na reação, a solução de cloreto de cálcio libera íons de Ca2+ que se ligam ao flúor, depositando-se nas sementes e formando cristais cada vez maiores. Quando atingem cerca de 4 milímetros, esses cristais vencem a força da água por gravidade e decantam para o fundo. Ali, passam por uma válvula rotatória e por uma peneira vibratória que remove a umidade residual. O resultado é a fluorita pura, pronta para estoque e para venda imediata.
+Redução do índice de flúor na barragem: o reator reduz o teor de flúor porque ele capta o efluente no canal de lama e extrai o mineral em forma de cristais antes que ele chegue ao reservatório.
+
+​Redução de riscos ambientais: o reator reduz os riscos porque ele converte íons de flúor solúveis e tóxicos em cristais de fluorita sólidos e inertes, eliminando o potencial de contaminação do ecossistema.
+
+​Maior conformidade regulatória: o reator garante a conformidade porque utiliza sensores de milissegundos para entregar uma água clarificada que atende rigorosamente aos limites de descarte da Resolução CONAMA n° 430/2011.
+
+​Melhoria da qualidade da água do reservatório: o reator melhora a água porque devolve ao sistema um efluente com baixa carga mineral, facilitando o reuso industrial e diminuindo a necessidade de captação externa.
+
+​Maior segurança operacional: o reator aumenta a segurança porque elimina a formação do lodo gelatinoso da cal, resultando em uma barragem mais seca, estável e com menor custo de manutenção.
+
+Essa é a nossa solução: transformar um risco ambiental em referência de sustentabilidade, inserindo a Mosaic no mercado regional de fluorita e curando uma de suas maiores dores.
+
+Esse é o roteiro do nosso pitch

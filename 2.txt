@@ -1,0 +1,53 @@
+
+Aqui está o Business Model Canvas reestruturado em texto, com foco estratégico na validação acadêmica de ponta e na rede de clientes industriais de Minas Gerais:
+​1. Proposta de Valor
+​Transformação de Passivo em Ativo: Conversão do efluente tóxico de flúor em Fluorita Grau Ácido (Acidspar) de alto valor comercial.
+​Eficiência Operacional para a Mosaic: Eliminação definitiva da geração de lodo, liberando volume útil nas barragens e extinguindo custos milionários com dragagem e obras de ampliação.
+​Soberania Mineral: Fornecimento de um insumo crítico de forma local, reduzindo a pegada de carbono e a dependência de importações para o parque industrial mineiro.
+​Chancela Científica: Processo validado por modelos cinéticos desenvolvidos em parceria com a USP e Unicamp, garantindo previsibilidade e pureza ao produto final.
+
+​2. Segmentos de Clientes (O Mercado de MG)
+​Siderurgia de Grande Porte (Gerdau): Fornecimento de fluorita como fundente essencial para a fluidez da escória em aciarias.
+​Indústria de Alumínio (CBA - Companhia Brasileira de Alumínio): Suprimento para a fabricação de fluoreto de alumínio e criolita, componentes vitais na eletrólise do metal.
+​Metalurgia Especial (CBMM): Apoio à simbiose industrial em Araxá para processos que exigem fluxantes minerais de alta pureza.
+​Indústria Química: Atendimento a fabricantes de ácido fluorídrico e polímeros.
+
+​3. Parceiros-Chave (O Ecossistema de Inovação)
+​USP (Universidade de São Paulo): Parceria em pesquisa fundamental de cristalização e termodinâmica química, utilizando a expertise do departamento de Engenharia Química e Mineral.
+​Unicamp (Universidade Estadual de Campinas): Colaboração no desenvolvimento de algoritmos de automação e controle preditivo do reator, garantindo que o sistema aprenda e se otimize em tempo real.
+​Mosaic Fertilizantes: Parceira âncora que fornece a infraestrutura de planta, o efluente de fluorapatita e o ambiente para escalonamento industrial.
+​Fomentos à Inovação (FAPESP/EMBRAPII): Potenciais fontes de subsídio para o desenvolvimento tecnológico contínuo.
+
+​4. Atividades-Chave
+​Cristalização Seletiva: Operação do reator Nexus-F para a formação de pellets densos de CaF_2.
+​P&D Colaborativo: Intercâmbio constante com laboratórios da USP e Unicamp para refino da pureza do cristal.
+​Monitoramento Ambiental: Gestão rigorosa dos parâmetros da CONAMA 430 para garantir descarte de água limpa.
+
+​5. Recursos-Chave
+​Propriedade Intelectual: Modelos matemáticos de crescimento de cristais desenvolvidos em ambiente acadêmico.
+​Infraestrutura Modular: Skids de reatores de leito fluidizado de fácil instalação via bypass.
+​Corpo Técnico: Especialistas formados nas melhores universidades do país (USP/Unicamp), unindo teoria e prática mineral
+
+​6. Relacionamento com Clientes
+​Simbiose Industrial: Integração de processos onde o rejeito de um se torna o insumo vital do outro.
+​Transparência Técnica: Relatórios de pureza e rastreabilidade mineral para os departamentos de suprimentos da Gerdau, CBA e CBMM.
+
+​7. Canais
+​Venda B2B Direta: Logística rodoviária otimizada para o triângulo mineiro e região metropolitana de BH.
+​Simpósios e Congressos: Divulgação dos resultados científicos alcançados em parceria com a academia para atrair novos investidores.
+
+​8. Estrutura de Custos
+​Insumos Químicos: Aquisição de Cloreto de Cálcio (CaCl_2) de alta solubilidade.
+​Bolsas e Pesquisa: Investimento na manutenção da parceria com USP e Unicamp.
+​OPEX Modular: Energia e manutenção preventiva dos reatores.
+
+​9. Fontes de Receita
+​Comercialização de Acidspar: Venda da fluorita sintetizada com preço atrelado ao mercado internacional.
+​Receita de Consultoria ESG: Valoração da solução de "Lodo Zero" para o balanço de sustentabilidade da Mosaic.
+​Economia de Escala: Redução drástica nos custos fixos de manutenção de barragens e dragagem (Lucro por Eficiência).
+No caso, o Gemini falou de acidspar, que é fluorita com altíssimo percentual de pureza ( > 97%)
+A tonelada dela pode ser vendida para a CBA e para indústrias químicas por cerca de 3.500 reais
+Se o pH se mantiver extremamente estável (8.2) ao longo de todo o processo, sim
+A acidspar é mais caro que a fluorita comum, então siderúrgicas, que não precisam de uma fluorita tão pura, iriam comprar apenas o metalspar, que possui cerca de 80% de pureza
+O nome técnico seria "Reator de Cristalização de Leito Fluidizado".
+Ao invés de citar nomes de empresas, coloque rótulos genéricos. Por exemplo, ao invés de colocar "Gerdau e CBMM", coloque "siderurgias e metalurgias próximas à Mosaic"
