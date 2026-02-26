@@ -19,6 +19,10 @@ html {
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
@@ -319,17 +323,7 @@ h2 span {
     }
 }
 
-@media (max-width: 1200px) {
-    .flow-container {
-        flex-direction: column;
-        gap: 2rem;
-    }
 
-    .flow-connector {
-        transform: rotate(90deg);
-        height: 50px;
-    }
-}
 
 /* Reactor Animation */
 .reactor-container {
@@ -452,6 +446,54 @@ h2 span {
 .gallery-item h4 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
+}
+
+/* Academic Leadership */
+.academic-section {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.academic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.academic-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 3rem;
+    border-radius: 20px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.academic-card:hover {
+    border-color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.academic-card h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.academic-card .institution {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.academic-card p {
+    font-size: 1rem;
+    color: rgba(224, 230, 237, 0.7);
+    line-height: 1.6;
 }
 
 /* Footer */

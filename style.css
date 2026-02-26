@@ -120,30 +120,71 @@ header {
     padding-bottom: 2rem;
 }
 
-@media (max-width: 1400px) {
-    .main-top {
-        grid-template-columns: 280px 1fr 250px;
-    }
-
-    .main-bottom {
-        grid-template-columns: 1fr;
-    }
-}
-
 @media (max-width: 1200px) {
     .main-top {
         grid-template-columns: 1fr;
         overflow-y: visible;
+        height: auto;
     }
 
     .simulation-view {
-        height: 500px;
+        height: 400px;
         order: -1;
+    }
+
+    .controls-panel,
+    .info-panel {
+        width: 100%;
     }
 
     .main-bottom {
         grid-template-columns: 1fr;
         height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .header-right {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .btn-back {
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo-text {
+        font-size: 1.2rem;
+    }
+
+    .dashboard-container {
+        padding: 0.5rem;
+    }
+
+    .panel {
+        padding: 0.8rem;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-card {
+        min-height: 70px;
+        padding: 0.5rem;
+    }
+
+    .stat-value {
+        font-size: 1rem;
     }
 }
 
@@ -242,11 +283,16 @@ input[type="range"]::-webkit-slider-thumb {
     padding: 0.8rem 1rem;
     border-radius: var(--radius-sm);
     border-left: 3px solid var(--neon-cyan);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
+    /* Removed 'all' to prevent size transitions */
     min-height: 85px;
+    width: 100%;
+    /* Occupy grid space fully */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
+    /* Prevent content from pushing edges */
 }
 
 .stat-card:hover {
@@ -259,12 +305,17 @@ input[type="range"]::-webkit-slider-thumb {
     color: var(--text-dim);
     text-transform: uppercase;
     margin-bottom: 4px;
+    white-space: nowrap;
 }
 
 .stat-value {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    /* Slightly smaller to fit large numbers */
     font-weight: 700;
     font-family: 'Orbitron', sans-serif;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 /* Simulation View */
