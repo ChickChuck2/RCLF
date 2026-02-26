@@ -1,0 +1,10 @@
+Você precisará citar estas fontes no seu referencial teórico (especialmente se seguir as normas ABNT para o projeto) para provar que a Mosaic segue o "padrão", mas que esse padrão está obsoleto em termos de eficiência de recursos.
+​As "Bíblias" da Engenharia:
+
+​Metcalf & Eddy - Wastewater Engineering: Treatment and Resource Recovery: Este é o manual definitivo de tratamento de efluentes. Ele descreve a Precipitação Química com Cal como o "Best Practicable Control Technology" (BPT) para remoção de metais e fluoretos devido ao baixo custo inicial do reagente e simplicidade operacional.
+
+​Perry's Chemical Engineers' Handbook: Na seção de separação sólido-líquido, o Perry detalha a coagulação/floculação com sais de cálcio (CaO/Ca(OH)_2) como o método padrão para controle de pH e remoção de ânions.
+
+​Wills' Mineral Processing Technology: O manual padrão de processamento mineral. Ele explica como as plantas de flotação de fosfato geram efluentes ácidos e com flúor, e como a cal é usada para neutralizar esses rejeitos antes de enviá-los às barragens.
+
+Esses manuais técnicos de engenharia química e mineral recomendam o uso de cal para tratamento de flúor em efluentes, então a Mosaic, assim como outras mineradoras, segue-os.

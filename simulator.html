@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristal Minas | Simulador RCLF</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <h1 class="logo-text">CRISTAL <span>MINAS</span></h1>
+        </div>
+        <nav class="simulator-nav" style="position: absolute; right: 2rem; top: 1.5rem;">
+            <a href="index.html" class="btn-back"
+                style="color: var(--neon-cyan); text-decoration: none; font-family: 'Orbitron'; font-size: 0.8rem; border: 1px solid var(--neon-cyan); padding: 0.5rem 1rem; border-radius: 4px; transition: all 0.3s; box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);">VOLTAR
+                PARA O INÍCIO</a>
+        </nav>
+        <div class="status-indicator">
+            <span id="statusText" style="letter-spacing: 1px; font-weight: bold;">SISTEMA EM ESPERA</span>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+        <!-- Top Section: Controls + Simulation -->
+        <div class="main-top">
+            <!-- Left Panel: Intelligent Controls -->
+            <aside class="panel controls-panel">
+                <h3>PAINEL OPERACIONAL - RCLF</h3>
+
+                <div class="control-group">
+                    <label>Velocidade Operacional</label>
+                    <input type="range" id="speedControl" min="0.1" max="5" step="0.1" value="1">
+                    <span id="speedVal" style="color: var(--neon-cyan)">1.0x</span>
+                </div>
+
+                <div class="control-group">
+                    <label>Vazão de Entrada (m³/h)</label>
+                    <input type="range" id="flowControl" min="0" max="1000" value="450">
+                    <span id="flowVal" style="color: var(--neon-cyan)">450 m³/h</span>
+                </div>
+
+                <div class="control-group">
+                    <label>Concentração de Flúor (mg/L)</label>
+                    <input type="range" id="concControl" min="50" max="500" value="50">
+                    <span id="concVal" style="color: var(--neon-cyan)">50 mg/L</span>
+                </div>
+
+                <div class="control-group">
+                    <label>Dosagem Cloreto de Cálcio (Smart)</label>
+                    <div id="dosingVal"
+                        style="font-size: 1.2rem; color: var(--neon-cyan); font-weight: bold; padding: 0.5rem 0;">
+                        AUTO-SYNCING...</div>
+                </div>
+
+                <div class="control-group" style="padding: 0.5rem 0;">
+                    <label>Mix de Produção (Acidspar %)</label>
+                    <input type="range" id="purityControl" min="0" max="100" value="0">
+                    <span id="purityVal" style="color: var(--neon-cyan)">0% Acidspar</span>
+                </div>
+
+                <div class="button-group" style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                    <button id="toggleSystem" class="btn-primary" style="flex: 2;">ATRIBUIR CARGA</button>
+                    <button id="resetSystem" class="btn-primary"
+                        style="flex: 1; background: transparent; border-color: var(--neon-red); color: var(--neon-red); text-shadow: 0 0 5px var(--neon-red);">REINICIAR</button>
+                </div>
+
+                <div class="info-section">
+                    Massa de Cloreto de Cálcio calculada via balanço estequiométrico em tempo real.
+                </div>
+            </aside>
+
+            <!-- Center: Simulation View -->
+            <section class="simulation-view">
+                <canvas id="simCanvas"></canvas>
+                <div class="watermark">CRYSTAL MINAS</div>
+            </section>
+
+            <!-- Right Panel: Info/Manual -->
+            <aside class="panel info-panel">
+                <h3>MANUAL DE OPERAÇÃO</h3>
+                <div class="info-section" style="border-color: var(--neon-green); height: 100%; border-style: solid;">
+                    <strong>ETAPAS DO PROCESSO:</strong><br><br>
+                    1. <strong>Entrada</strong>: O efluente tóxico é injetado na base.<br><br>
+                    2. <strong>Reação</strong>: íons Ca²+ ligam-se aos íons F-.<br><br>
+                    3. <strong>Crescimento</strong>: Cristais crescem no leito.<br><br>
+                    4. <strong>Coleta</strong>: Venda industrial garantida.
+                </div>
+            </aside>
+        </div>
+
+        <!-- Bottom Section: Grouped Gauges -->
+        <div class="main-bottom">
+            <!-- Left: Technical Monitoring -->
+            <div class="panel stats-panel tech-stats-grid">
+                <h3 style="color: var(--neon-cyan);">MONITORAMENTO TÉCNICO</h3>
+                <div class="stats-row">
+                    <div class="stat-card" style="border-left-color: var(--neon-cyan);">
+                        <div class="stat-label">Tempo Operação</div>
+                        <div class="stat-value" id="simTime">0d 0h</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-green);">
+                        <div class="stat-label">Estabilidade pH</div>
+                        <div class="stat-value" id="phLevel">8.20</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-red);">
+                        <div class="stat-label">Massa Flúor</div>
+                        <div class="stat-value" id="fInput">0.00 g</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-cyan);">
+                        <div class="stat-label">Saída Fluorita</div>
+                        <div class="stat-value" id="fluoriteOutput">0.00 g</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-orange);">
+                        <div class="stat-label">Consumo CaCl2</div>
+                        <div class="stat-value" id="cacl2Used">0.00 kg</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-green);">
+                        <div class="stat-label">Eficiência (%)</div>
+                        <div class="stat-value" id="efficiencyVal">98.5%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Economic Performance -->
+            <div class="panel stats-panel logic-stats-grid">
+                <h3 style="color: var(--neon-orange);">PERFORMANCE ECONÔMICA</h3>
+                <div class="stats-row">
+                    <div class="stat-card" style="border-left-color: var(--neon-cyan);">
+                        <div class="stat-label">Custo CAPEX</div>
+                        <div class="stat-value" id="capexDisplay">R$ 1.0M</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-orange);">
+                        <div class="stat-label">Faturamento (30d)</div>
+                        <div class="stat-value" id="revenue30d">R$ 0,00</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-green);">
+                        <div class="stat-label">EBITDA (30d) (+ESG)</div>
+                        <div class="stat-value" id="profit30d">R$ 0,00</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-orange);">
+                        <div class="stat-label">Faturamento Total</div>
+                        <div class="stat-value" id="revenueValue">0,00</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-green);">
+                        <div class="stat-label">EBITDA Total (+ESG)</div>
+                        <div class="stat-value" id="profitValue">0,00</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-cyan);">
+                        <div class="stat-label">Custos Evitados (ESG)</div>
+                        <div class="stat-value" id="savingsValue">0,00</div>
+                    </div>
+                    <div class="stat-card" style="border-left-color: var(--neon-cyan);">
+                        <div class="stat-label">Retorno sobre Investimento</div>
+                        <div class="stat-value" id="roiValue">0.00%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="simulation.js"></script>
+</body>
+
+</html>

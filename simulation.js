@@ -43,6 +43,7 @@ class ChemistryEngine {
         this.simTimeMs = 0; // Simulated time in milliseconds
         this.history = []; // Array of daily snapshots { day, revenue, cost }
         this.lastSnapshotDay = -1;
+        this.purityMix = 0; // % of Acidspar production (0-100)
     }
 
     reset() {
@@ -57,12 +58,14 @@ class ChemistryEngine {
         this.totalFixedCost = 0;
         this.history = [];
         this.lastSnapshotDay = -1;
+        this.purityMix = 0;
     }
 
     calculateReaction(flowRate, ppmF, dt, speed) {
         const effectiveDt = (dt / 1000) * speed;
-        // m3/h * ppm / 3600 = g/s
-        const massF = (flowRate * ppmF / 3600) * effectiveDt;
+        // SCALE PRODUCTION BY SIMULATION SPEED (1s real = 4h sim = 14400x)
+        const timeMultiplier = 4 * 3600;
+        const massF = (flowRate * ppmF / 3600) * effectiveDt * timeMultiplier;
 
         // Stoichiometry
         const massFluorite = massF * CONFIG.STOICHIOMETRY.F_TO_CAF2;
@@ -72,15 +75,12 @@ class ChemistryEngine {
         this.totalFluoriteOutput += massFluorite;
         this.totalCaCl2Used += massCaCl2;
 
-        // Financial Calculation (per second)
-        const tonsFluorite = massFluorite / 1000000;
-        const tonsCaCl2 = massCaCl2 / 1000000;
+        // Financial Calculation (Weighted Average Price based on Production Mix)
+        const acidPercent = this.purityMix / 100;
+        const metalPercent = 1 - acidPercent;
+        const weightedPrice = (acidPercent * CONFIG.MARKET.PRICE_ACIDSPAR) + (metalPercent * CONFIG.MARKET.PRICE_METALSPAR);
 
-        // Purity check (simplified: if pH is stable at 8.2 we get Acidspar)
-        const isHighPurity = Math.abs(this.currentPH - CONFIG.PHYSICS.TARGET_PH) < 0.05;
-        const price = isHighPurity ? CONFIG.MARKET.PRICE_ACIDSPAR : CONFIG.MARKET.PRICE_METALSPAR;
-
-        this.totalRevenue += tonsFluorite * price;
+        this.totalRevenue += tonsFluorite * weightedPrice;
         this.totalVariableCost += tonsCaCl2 * CONFIG.MARKET.COST_CACL2;
 
         // ESG Savings calculation (per second)
@@ -88,8 +88,6 @@ class ChemistryEngine {
         this.totalSavings += tonsF * CONFIG.MARKET.AVOIDED_COST_LIME_SLUDGE;
 
         // Update Simulated Time (1 real sec = 4 hours)
-        // This makes 1 day = 6 real seconds at 1x speed
-        const timeMultiplier = 4 * 3600; // 1s = 14400s (4h)
         this.simTimeMs += effectiveDt * timeMultiplier * 1000;
 
         // Deduced Fixed OPEX based on elapsed simulation days
@@ -257,6 +255,11 @@ class Simulation {
         };
 
         document.getElementById('resetSystem').onclick = () => this.reset();
+
+        bind('purityControl', 'purityMix', (v) => {
+            this.chem.purityMix = v;
+            document.getElementById('purityVal').innerText = v.toFixed(0) + '% Acidspar';
+        });
     }
 
     reset() {
@@ -286,11 +289,11 @@ class Simulation {
         // Show auto-calculated dosing
         document.getElementById('dosingVal').innerText = `AUTO: ${results.massCaCl2.toFixed(2)} g/s`;
 
-        // Monthly Estimation Calculation
+        // Monthly Estimation Calculation (EBITDA = Revenue - Costs + Avoided Costs)
         const monthlyRevenue = this.chem.totalRevenue;
         const monthlyVarCost = this.chem.totalVariableCost;
         const totalCost = monthlyVarCost + (this.chem.totalFixedCost || 0);
-        const netProfit = monthlyRevenue - totalCost;
+        const netProfit = (monthlyRevenue - totalCost) + this.chem.totalSavings;
 
         // ROI Calculation
         const roi = (netProfit / CONFIG.FINANCIAL.CAPEX) * 100;
