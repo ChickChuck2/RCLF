@@ -39,6 +39,7 @@ class ChemistryEngine {
         this.totalCaCl2Used = 0;
         this.totalRevenue = 0;
         this.totalVariableCost = 0;
+        this.totalFixedCost = 0;
         this.totalSavings = 0;
         this.simTimeMs = 0; // Simulated time in milliseconds
         this.history = []; // Array of daily snapshots { day, revenue, cost }
@@ -76,6 +77,9 @@ class ChemistryEngine {
         this.totalCaCl2Used += massCaCl2;
 
         // Financial Calculation (Weighted Average Price based on Production Mix)
+        const tonsFluorite = massFluorite / 1000000;
+        const tonsCaCl2 = massCaCl2 / 1000000;
+
         const acidPercent = this.purityMix / 100;
         const metalPercent = 1 - acidPercent;
         const weightedPrice = (acidPercent * CONFIG.MARKET.PRICE_ACIDSPAR) + (metalPercent * CONFIG.MARKET.PRICE_METALSPAR);
