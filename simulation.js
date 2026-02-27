@@ -16,8 +16,8 @@ const CONFIG = {
         AVOIDED_COST_LIME_SLUDGE: 7237.5 // BRL/ton of F avoided
     },
     FINANCIAL: {
-        CAPEX: 1000000,       // R$ 1 Million as per user request
-        OPEX_FIXED_DAY: 1500 // Daily fixed cost (Energy + Labor)
+        CAPEX: 15000000,      // R$ 15 Million (Realistic for 450 m3/h major plant)
+        OPEX_FIXED_DAY: 4800 // Daily fixed cost (Labor 3 shifts + Energy for high-head pumps)
     },
     PHYSICS: {
         TARGET_PH: 8.2,
@@ -319,22 +319,27 @@ class Simulation {
         const totalCost = this.chem.totalVariableCost + (this.chem.totalFixedCost || 0);
         const netProfit = (this.chem.totalRevenue - totalCost) + this.chem.totalSavings;
 
-        // Calculate 30-day rolling financials
+        // Calculate 30-day rolling financials (Monthly Projections)
         let rev30 = 0;
         let pro30 = 0;
-        if (this.chem.history.length > 1) {
+        const totalDays = this.chem.simTimeMs / (1000 * 24 * 3600);
+
+        if (this.chem.history.length > 2) {
             const now = this.chem.history[this.chem.history.length - 1];
-            // Find snapshot closest to 30 days ago
             const targetDay = now.day - 30;
             const prev = this.chem.history.find(h => h.day >= targetDay) || this.chem.history[0];
 
-            rev30 = now.revenue - prev.revenue;
-            // EBITDA 30d = (Delta Revenue - Delta Cost) + Delta Savings
-            pro30 = (now.revenue - now.cost + now.savings) - (prev.revenue - prev.cost + prev.savings);
-        } else {
-            // Initial phase: just show current accumulated
-            rev30 = this.chem.totalRevenue;
-            pro30 = netProfit;
+            // Delta over the window
+            const windowDays = now.day - prev.day;
+            if (windowDays > 0) {
+                // Normalize to exactly 30 days
+                rev30 = (now.revenue - prev.revenue) * (30 / windowDays);
+                pro30 = ((now.revenue - now.cost + now.savings) - (prev.revenue - prev.cost + prev.savings)) * (30 / windowDays);
+            }
+        } else if (totalDays > 0.01) {
+            // Extrapolate if we have at least some data
+            rev30 = (this.chem.totalRevenue / totalDays) * 30;
+            pro30 = (netProfit / totalDays) * 30;
         }
 
         // ROI Calculation (Annualized based on 30-day performance)
