@@ -67,28 +67,33 @@ body::before {
 
 /* Header & Hero */
 .main-header {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     position: relative;
-    padding: 0 5%;
+    padding: 80px 5% 4rem 5%;
+    /* Top padding for nav */
     background: radial-gradient(circle at center, rgba(0, 210, 255, 0.05) 0%, transparent 70%);
 }
 
 nav {
-    position: absolute;
+    position: fixed;
+    /* Changed to fixed to stay at top correctly */
     top: 0;
+    left: 0;
     width: 100%;
-    padding: 1.5rem 5%;
+    padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
-    backdrop-filter: blur(10px);
-    background: rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    /* Higher z-index */
+    backdrop-filter: blur(15px);
+    background: rgba(2, 4, 8, 0.8);
+    /* Darker for better contrast */
     border-bottom: 1px solid var(--glass-border);
 }
 
@@ -165,7 +170,7 @@ nav {
 
 /* Sections */
 section {
-    padding: 8rem 10%;
+    padding: 1rem 10%;
     position: relative;
 }
 
