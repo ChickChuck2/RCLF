@@ -104,6 +104,7 @@ class ChemistryEngine {
             this.history.push({
                 day: currentDay,
                 revenue: this.totalRevenue,
+                savings: this.totalSavings,
                 cost: this.totalVariableCost + this.totalFixedCost
             });
             this.lastSnapshotDay = currentDay;
@@ -134,7 +135,7 @@ class PhysicsEngine {
         const fluidVelocity = (flowRate / 100) * speed;
 
         this.particles.forEach((p, i) => {
-            p.update(dt, fluidVelocity);
+            p.update(dt, fluidVelocity, centerY);
             if (p.isOutOfBounds(centerY) || p.isDead()) {
                 this.particles.splice(i, 1);
             }
@@ -149,7 +150,8 @@ class PhysicsEngine {
         const x = centerX + (Math.random() - 0.5) * 120;
         const y = centerY + 180;
         const type = Math.random() > 0.3 ? 'crystal' : 'fluid';
-        this.particles.push(new Particle(x, y, 1 + Math.random() * 3, type));
+        const startSize = type === 'crystal' ? 1 : 1 + Math.random() * 3;
+        this.particles.push(new Particle(x, y, startSize, type));
     }
 }
 
@@ -166,12 +168,33 @@ class Particle {
         this.vy = type === 'crystal' ? Math.random() * 2 : -Math.random() * 3;
         this.alpha = 1;
         this.color = type === 'crystal' ? '#00f2ff' : '#39ff14';
+        this.sedimenting = false;
     }
 
-    update(dt, fluidVelocity) {
+    update(dt, fluidVelocity, centerY) {
         if (this.type === 'crystal') {
-            const drag = fluidVelocity * CONFIG.PHYSICS.DRAG_COEFFICIENT;
-            this.vy += CONFIG.PHYSICS.GRAVITY - drag;
+            // Growth logic
+            if (!this.sedimenting && this.vy < 0 && this.size < 6) {
+                this.size += 0.015; // Grow while rising
+            }
+
+            // Dynamics
+            const drag = (fluidVelocity * 0.12) * (1 / this.size);
+            const grav = 0.05 * this.size;
+
+            // Forced transition at the top or when heavy
+            if (this.y < centerY - 130 || this.size >= 6) {
+                this.sedimenting = true;
+            }
+
+            if (this.sedimenting) {
+                // When sedimenting, we ignore upward drag and force vy to be positive
+                this.vy += grav * 1.5;
+                if (this.vy < 1.5) this.vy = 1.5; // Direct descendance
+            } else {
+                this.vy += grav - drag;
+            }
+
             this.x += this.vx;
             this.y += this.vy;
         } else {
@@ -182,7 +205,7 @@ class Particle {
     }
 
     isOutOfBounds(centerY) {
-        return this.y > centerY + 200 || this.y < centerY - 250;
+        return this.y > centerY + 220 || this.y < centerY - 280;
     }
 
     isDead() {
@@ -293,14 +316,30 @@ class Simulation {
         // Show auto-calculated dosing
         document.getElementById('dosingVal').innerText = `AUTO: ${results.massCaCl2.toFixed(2)} g/s`;
 
-        // Monthly Estimation Calculation (EBITDA = Revenue - Costs + Avoided Costs)
-        const monthlyRevenue = this.chem.totalRevenue;
-        const monthlyVarCost = this.chem.totalVariableCost;
-        const totalCost = monthlyVarCost + (this.chem.totalFixedCost || 0);
-        const netProfit = (monthlyRevenue - totalCost) + this.chem.totalSavings;
+        const totalCost = this.chem.totalVariableCost + (this.chem.totalFixedCost || 0);
+        const netProfit = (this.chem.totalRevenue - totalCost) + this.chem.totalSavings;
 
-        // ROI Calculation
-        const roi = (netProfit / CONFIG.FINANCIAL.CAPEX) * 100;
+        // Calculate 30-day rolling financials
+        let rev30 = 0;
+        let pro30 = 0;
+        if (this.chem.history.length > 1) {
+            const now = this.chem.history[this.chem.history.length - 1];
+            // Find snapshot closest to 30 days ago
+            const targetDay = now.day - 30;
+            const prev = this.chem.history.find(h => h.day >= targetDay) || this.chem.history[0];
+
+            rev30 = now.revenue - prev.revenue;
+            // EBITDA 30d = (Delta Revenue - Delta Cost) + Delta Savings
+            pro30 = (now.revenue - now.cost + now.savings) - (prev.revenue - prev.cost + prev.savings);
+        } else {
+            // Initial phase: just show current accumulated
+            rev30 = this.chem.totalRevenue;
+            pro30 = netProfit;
+        }
+
+        // ROI Calculation (Annualized based on 30-day performance)
+        const annualProfit = pro30 * 12;
+        const roi = (annualProfit / CONFIG.FINANCIAL.CAPEX) * 100;
 
         // Time Formatting
         const totalSeconds = this.chem.simTimeMs / 1000;
@@ -316,28 +355,11 @@ class Simulation {
             timeStr = `${hours}h`;
         }
 
-        set('revenueValue', 'R$ ' + formatBRL(monthlyRevenue));
+        set('revenueValue', 'R$ ' + formatBRL(this.chem.totalRevenue));
         set('profitValue', 'R$ ' + formatBRL(netProfit));
         set('savingsValue', 'R$ ' + formatBRL(this.chem.totalSavings));
         set('roiValue', roi.toFixed(2) + '%');
         set('simTime', timeStr);
-
-        // Calculate 30-day rolling financials
-        let rev30 = 0;
-        let pro30 = 0;
-        if (this.chem.history.length > 1) {
-            const now = this.chem.history[this.chem.history.length - 1];
-            // Find snapshot closest to 30 days ago
-            const targetDay = now.day - 30;
-            const prev = this.chem.history.find(h => h.day >= targetDay) || this.chem.history[0];
-
-            rev30 = now.revenue - prev.revenue;
-            pro30 = (now.revenue - now.cost) - (prev.revenue - prev.cost);
-        } else {
-            // Initial phase: just show current accumulated
-            rev30 = monthlyRevenue;
-            pro30 = netProfit;
-        }
 
         set('revenue30d', 'R$ ' + formatBRL(rev30));
         set('profit30d', 'R$ ' + formatBRL(pro30));
