@@ -174,23 +174,23 @@ class Particle {
     update(dt, fluidVelocity, centerY) {
         if (this.type === 'crystal') {
             // Growth logic
-            if (!this.sedimenting && this.vy < 0 && this.size < 6) {
-                this.size += 0.015; // Grow while rising
+            if (!this.sedimenting && this.vy < 0 && this.size < 10) {
+                this.size += 0.03; // Faster growth while rising
             }
 
             // Dynamics
-            const drag = (fluidVelocity * 0.12) * (1 / this.size);
-            const grav = 0.05 * this.size;
+            const drag = (fluidVelocity * 0.15) * (1 / this.size);
+            const grav = 0.04 * this.size;
 
             // Forced transition at the top or when heavy
-            if (this.y < centerY - 130 || this.size >= 6) {
+            if (this.y < centerY - 130 || this.size >= 10) {
                 this.sedimenting = true;
             }
 
             if (this.sedimenting) {
                 // When sedimenting, we ignore upward drag and force vy to be positive
                 this.vy += grav * 1.5;
-                if (this.vy < 1.5) this.vy = 1.5; // Direct descendance
+                if (this.vy < 2) this.vy = 2; // Faster, more decisive fall
             } else {
                 this.vy += grav - drag;
             }
