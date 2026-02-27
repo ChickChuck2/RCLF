@@ -27,8 +27,27 @@ body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
     color: var(--text-color);
-    overflow-x: hidden;
     line-height: 1.6;
+    overflow-x: hidden;
+    background-image: url('logotipo_no_BG.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
+    background-attachment: fixed;
+}
+
+/* Overlay to blend logo with dark background */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 15, 25, 0.85);
+    /* Smooth blending */
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Background grid effect */

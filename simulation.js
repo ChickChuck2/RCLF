@@ -16,8 +16,8 @@ const CONFIG = {
         AVOIDED_COST_LIME_SLUDGE: 7237.5 // BRL/ton of F avoided
     },
     FINANCIAL: {
-        CAPEX: 15000000,      // R$ 15 Million (Realistic for 450 m3/h major plant)
-        OPEX_FIXED_DAY: 4800 // Daily fixed cost (Labor 3 shifts + Energy for high-head pumps)
+        CAPEX: 1000000,       // Reverted to R$ 1 Million
+        OPEX_FIXED_DAY: 1500 // Reverted to lower OPEX for the 1M CAPEX scale
     },
     PHYSICS: {
         TARGET_PH: 8.2,
@@ -342,9 +342,8 @@ class Simulation {
             pro30 = (netProfit / totalDays) * 30;
         }
 
-        // ROI Calculation (Annualized based on 30-day performance)
-        const annualProfit = pro30 * 12;
-        const roi = (annualProfit / CONFIG.FINANCIAL.CAPEX) * 100;
+        // ROI Calculation (Cumulative growth based on actual accumulated profit)
+        const roi = (netProfit / CONFIG.FINANCIAL.CAPEX) * 100;
 
         // Time Formatting
         const totalSeconds = this.chem.simTimeMs / 1000;

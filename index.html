@@ -23,16 +23,8 @@
                 <li><a href="simulator.html" style="color: var(--primary-color);">Simulador</a></li>
             </ul>
         </nav>
-
-        <div class="hero-content">
-            <h1>Economia Circular<br>em Mineração</h1>
-            <p>Transformando efluentes industriais em minerais de alto valor agregado através da cristalização em leito
-                fluidizado (RCLF).</p>
-            <a href="simulator.html" class="cta-button">Acessar Simulador RCLF</a>
-        </div>
-
-        <!-- Animated Reactor Aesthetic -->
-        <div class="reactor-container">
+        <!-- Animated Reactor Aesthetic - Positioned higher "above" the content -->
+        <div class="reactor-container" style="top: 5%; right: 10%; bottom: auto; opacity: 0.3; transform: scale(0.8);">
             <div class="reactor-shell">
                 <div class="crystal-particle" style="--x: 20%; --d: 3s; --o: 0.8;"></div>
                 <div class="crystal-particle" style="--x: 50%; --d: 4s; --o: 0.6;"></div>
@@ -42,6 +34,27 @@
                 <div class="crystal-particle" style="--x: 15%; --d: 4.5s; --o: 0.4;"></div>
             </div>
         </div>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>CRISTAL <span>MINAS</span></h1>
+                <p>Transformando efluentes tóxicos de mineração em ativos minerais de alto valor através de
+                    Cristalização em Leito Fluidizado (RCLF).</p>
+
+                <!-- Video Pitch Integration -->
+                <div class="video-container"
+                    style="max-width: 800px; margin: 2rem auto; border-radius: 20px; overflow: hidden; box-shadow: 0 0 50px rgba(0, 242, 255, 0.4); border: 2px solid var(--primary-color); background: #000; position: relative; z-index: 5;">
+                    <video width="100%" height="auto" src="pitch.mp4" controls autoplay muted loop playsinline
+                        preload="auto" style="display: block;">
+                        Seu navegador não suporta vídeos HTML5.
+                    </video>
+                </div>
+
+                <div class="hero-btns">
+                    <a href="simulator.html" class="cta-button">Iniciar RCLF</a>
+                </div>
+            </div>
+        </section>
     </header>
 
     <main>
