@@ -551,3 +551,47 @@ footer p {
         display: none;
     }
 }
+
+/* Supporters Section */
+.supporters-section {
+    padding: 1%;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 1px solid var(--glass-border);
+}
+
+.supporters-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.supporter-logo {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: grayscale(1) brightness(0.7) contrast(1.2);
+    opacity: 0.5;
+}
+
+.supporter-logo:hover {
+    filter: grayscale(0) brightness(1.1) contrast(1);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.supporter-logo img {
+    height: 70px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .supporters-grid {
+        gap: 2.5rem;
+    }
+
+    .supporter-logo img {
+        height: 50px;
+    }
+}
