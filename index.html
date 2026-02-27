@@ -23,8 +23,9 @@
                 <li><a href="simulator.html" style="color: var(--primary-color);">Simulador</a></li>
             </ul>
         </nav>
-        <!-- Animated Reactor Aesthetic - Positioned higher "above" the content -->
-        <div class="reactor-container" style="top: 5%; right: 10%; bottom: auto; opacity: 0.3; transform: scale(0.8);">
+        <!-- Animated Reactor Aesthetic - Explicitly non-blocking -->
+        <div class="reactor-container"
+            style="top: 5%; right: 10%; bottom: auto; opacity: 0.3; transform: scale(0.8); pointer-events: none;">
             <div class="reactor-shell">
                 <div class="crystal-particle" style="--x: 20%; --d: 3s; --o: 0.8;"></div>
                 <div class="crystal-particle" style="--x: 50%; --d: 4s; --o: 0.6;"></div>
@@ -50,7 +51,7 @@
                     </video>
                 </div>
 
-                <div class="hero-btns">
+                <div class="hero-btns" style="position: relative; z-index: 10;">
                     <a href="simulator.html" class="cta-button">Iniciar RCLF</a>
                 </div>
             </div>
