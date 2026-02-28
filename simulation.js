@@ -309,8 +309,8 @@ class Simulation {
         const set = (id, val) => document.getElementById(id).innerText = val;
         const formatBRL = (v) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
 
-        set('fInput', (this.chem.totalFInput / 1000).toFixed(2) + ' kg');
-        set('fluoriteOutput', (this.chem.totalFluoriteOutput / 1000).toFixed(2) + ' kg');
+        set('fInput', (this.chem.totalFInput / 1000000).toFixed(3) + ' t');
+        set('fluoriteOutput', (this.chem.totalFluoriteOutput / 1000000).toFixed(3) + ' t');
         set('phLevel', this.chem.currentPH.toFixed(2));
 
         // Show auto-calculated dosing
@@ -368,7 +368,7 @@ class Simulation {
         set('revenue30d', 'R$ ' + formatBRL(rev30));
         set('profit30d', 'R$ ' + formatBRL(pro30));
 
-        set('cacl2Used', (this.chem.totalCaCl2Used / 1000).toFixed(2) + ' kg');
+        set('cacl2Used', (this.chem.totalCaCl2Used / 1000000).toFixed(3) + ' t');
 
         // Dynamic Efficiency based on pH stability (Target 8.2)
         const phError = Math.abs(this.chem.currentPH - 8.2);
