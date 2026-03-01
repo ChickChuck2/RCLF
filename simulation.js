@@ -17,7 +17,7 @@ const CONFIG = {
     },
     FINANCIAL: {
         CAPEX: 1000000,       // Reverted to R$ 1 Million
-        OPEX_FIXED_DAY: 1500 // Reverted to lower OPEX for the 1M CAPEX scale
+        OPEX_FIXED_DAY: 4500 // Updated as per user request
     },
     PHYSICS: {
         TARGET_PH: 8.2,
@@ -362,6 +362,7 @@ class Simulation {
         set('revenueValue', 'R$ ' + formatBRL(this.chem.totalRevenue));
         set('profitValue', 'R$ ' + formatBRL(netProfit));
         set('savingsValue', 'R$ ' + formatBRL(this.chem.totalSavings));
+        set('opexValue', 'R$ ' + formatBRL(totalCost));
         set('roiValue', roi.toFixed(2) + '%');
         set('simTime', timeStr);
 
